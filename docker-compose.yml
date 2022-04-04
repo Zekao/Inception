@@ -1,0 +1,50 @@
+version: "3.9"
+
+services:
+# ------------------- NGNIX DOCKER FILE ------------------- #
+  nginx:
+    build: ./nginx
+    ports:
+      - "443:443"
+      - "80:80"
+    volumes:
+      - .:/nginx
+    image: "inception_nginx"
+# ------------------- WORDPRESS DOCKER FILE ------------------- #
+  # wordpress:
+  #   depends_on:
+  #     - mariadb
+  #   image: wordpress
+  #   build: ./wordpress
+  #   ports:
+  #     - "8000:80"
+  #   restart: always
+  #   environment:
+  #   - MYSQL_DATABASE=123
+  #   - MYSQL_ROOT_PASSWORD=123
+  #   - MYSQL_USER=emaugale
+  #   - MYSQL_PASSWORD=123
+  #   working_dir: /var/www/html
+  #   volumes:
+  #     - .:/wordpress
+      # - ./wp-content:/var/www/html/wp-content
+      # - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+# ------------------- MARIADB DOCKER FILE ------------------- #
+  mariadb:
+    image: "mariadb"
+    container_name: mariadb
+    restart: always
+    ports:
+      - "3306:3306"
+    build:
+      context: ./mariadb
+      args:
+        MYSQL_ROOT_PASSWORD: mysql_root_pass 
+    volumes:
+      - .:/mariadb
+    networks:
+      host:
+
+networks:
+  host:
+    driver: bridge
