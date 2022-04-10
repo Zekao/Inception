@@ -15,4 +15,4 @@ COPY ./conf/wp-config.php /etc/
 COPY ./conf/script.sh  /etc/
 
 
-CMD [ "bash", "/etc/launch.sh" ]
+CMD [ "bash", "/etc/script.sh" ]
