@@ -1,21 +1,26 @@
-FROM alpine:3.14
+FROM debian:buster
 
+# network port
 EXPOSE 80
+# ssl port
 EXPOSE 443
 
 # update nginx
 
-RUN apk add --no-cache nginx openssl gettext && \
-    rm -rf /var/cache/apk/*
+RUN apt-get update &&\
+   apt-get install nginx openssl gettext -y && \
+   rm -rf /var/lib/apt/lists/*
+
 
 # creating directory for the webbsite
 RUN mkdir -p /var/www/html/
-
 # Add infos about my domain
 ARG DOMAIN_NAME
 ARG NGINX_CERT
 ARG NGINX_KEY
 
+# Copy of nginx conf
+COPY ./conf/nginx.conf.template /etc/nginx/template
 
 # SSL creating repos
 RUN mkdir -p /etc/nginx/ssl/private &&\

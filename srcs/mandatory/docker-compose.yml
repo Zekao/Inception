@@ -11,27 +11,27 @@ services:
       - .:/nginx
     image: "inception_nginx"
 # ------------------- WORDPRESS DOCKER FILE ------------------- #
-  # wordpress:
-  #   depends_on:
-  #     - mariadb
-  #   image: wordpress
-  #   build: ./wordpress
-  #   ports:
-  #     - "8000:80"
-  #   restart: always
-  #   environment:
-  #   - MYSQL_DATABASE=123
-  #   - MYSQL_ROOT_PASSWORD=123
-  #   - MYSQL_USER=emaugale
-  #   - MYSQL_PASSWORD=123
-  #   working_dir: /var/www/html
-  #   volumes:
-  #     - .:/wordpress
+  wordpress:
+    depends_on:
+      - mariadb
+    image: wordpress
+    build: ./wordpress
+    ports:
+      - "8000:80"
+    restart: always
+    environment:
+    - MYSQL_DATABASE=123
+    - MYSQL_ROOT_PASSWORD=123
+    - MYSQL_USER=emaugale
+    - MYSQL_PASSWORD=123
+    working_dir: /var/www/html
+    volumes:
+      - .:/wordpress
       # - ./wp-content:/var/www/html/wp-content
       # - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
 # ------------------- MARIADB DOCKER FILE ------------------- #
   mariadb:
-    image: "mariadb"
+    image: "inception_mariadb"
     container_name: mariadb
     restart: always
     ports:
