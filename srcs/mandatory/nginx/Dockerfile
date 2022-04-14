@@ -1,7 +1,7 @@
 FROM debian:buster
 
 # network port
-EXPOSE 80
+# EXPOSE 80
 # ssl port
 EXPOSE 443
 
@@ -21,6 +21,9 @@ ARG NGINX_KEY
 
 # Copy of nginx conf
 COPY ./conf/nginx.conf.template /etc/nginx/template
+
+RUN chmod -R 777 /var/lib/nginx
+RUN chmod -R 777 /var/www/html
 
 # SSL creating repos
 RUN mkdir -p /etc/nginx/ssl/private &&\

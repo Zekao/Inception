@@ -3,13 +3,18 @@ version: "3.9"
 services:
 # ------------------- NGNIX DOCKER FILE ------------------- #
   nginx:
+    depends_on:
+      - wordpress
     build: ./nginx
     ports:
       - "443:443"
-      - "80:80"
-    volumes:
-      - .:/nginx
+    restart: always
+    networks:
+      - host
     image: "inception_nginx"
+    working_dir: /var/www/html
+    volumes:
+      - wp-files:/var/www/html
 # ------------------- WORDPRESS DOCKER FILE ------------------- #
   wordpress:
     depends_on:
@@ -17,18 +22,18 @@ services:
     image: wordpress
     build: ./wordpress
     ports:
-      - "8000:80"
+      - "9000:9000"
     restart: always
-    environment:
-    - MYSQL_DATABASE=123
-    - MYSQL_ROOT_PASSWORD=123
-    - MYSQL_USER=emaugale
-    - MYSQL_PASSWORD=123
+    # environment:
+    # - MYSQL_DATABASE=123
+  #   - MYSQL_ROOT_PASSWORD=123
+  #   - MYSQL_USER=emaugale
+  #   - MYSQL_PASSWORD=123
     working_dir: /var/www/html
+    networks:
+      - host
     volumes:
-      - .:/wordpress
-      # - ./wp-content:/var/www/html/wp-content
-      # - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+      - wp-files:/var/www/html
 # ------------------- MARIADB DOCKER FILE ------------------- #
   mariadb:
     image: "inception_mariadb"
@@ -38,13 +43,29 @@ services:
       - "3306:3306"
     build:
       context: ./mariadb
-      args:
-        MYSQL_ROOT_PASSWORD: mysql_root_pass 
-    volumes:
-      - .:/mariadb
+      # args:
+        # MYSQL_ROOT_PASSWORD: mysql_root_pass 
     networks:
-      host:
+      - host
+    volumes:
+      - wp-db:/var/lib/mysql
 
 networks:
   host:
     driver: bridge
+
+# ------------------- VOLUMES ------------------- #
+volumes:
+  wp-db:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/emaugale/data/wp-db
+      o: bind
+
+  wp-files:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/emaugale/data/wp-files
+      o: bind

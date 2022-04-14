@@ -12,9 +12,9 @@
 
 
 /* MySQL settings */
-define( 'DB_NAME',     'wp_wordpress' );
-define( 'DB_USER',     'emaugale' );
-define( 'DB_PASSWORD', '#IHateThisProject42' );
+define( 'DB_NAME',     'inception' );
+define( 'DB_USER',     'root' );
+define( 'DB_PASSWORD', 'wordpress' );	
 define( 'DB_HOST',     'mariadb' );
 define( 'DB_CHARSET',  'utf8mb4' );
 

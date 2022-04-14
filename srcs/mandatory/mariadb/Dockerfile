@@ -3,6 +3,8 @@ FROM	debian:buster
 EXPOSE 3306
 
 # update packages and install mariadb
+
+# RUN     rm -rf /var/run/mysqld
 RUN		apt-get update -y
 RUN		apt-get install -y mariadb-server
 RUN 	apt-get install -y mariadb-client
@@ -15,6 +17,7 @@ RUN		mkdir -p /run/mysqld/ && chown -R mysql:root /run/mysqld
 
 COPY 	conf/script.sh /var/
 
-RUN     chmod 700 /var/script.sh
+RUN     chmod -R 755 /var/lib/mysql
+RUN     chmod 755 /var/script.sh
 
-CMD 	["bash", "/var/script.sh"]
+CMD 	["bash", "/var/script.sh"]  

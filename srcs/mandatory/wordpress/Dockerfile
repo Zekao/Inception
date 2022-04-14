@@ -9,10 +9,21 @@ RUN apt-get update -y &&\
 COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d/
 
 RUN mkdir -p /var/run && \
-    mkdir /run/php
+    mkdir /run/php && \
+    mkdir -p /var/www/html/
 
 COPY ./conf/wp-config.php /etc/
-COPY ./conf/script.sh  /etc/
+# RUN  ls -l /var/www/html
+COPY ./conf/script.sh  /etc/script.sh
+RUN  chmod -R 755 /var/www/html/
+# RUN  chmod 755 /var/www/html/wp-config.php
+
+# Wordpress-cli install guide :  https://make.wordpress.org/cli/handbook/guides/installing/
+
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
+    php wp-cli.phar --info && \
+    chmod +x wp-cli.phar && \
+    mv wp-cli.phar /usr/local/bin/wp
 
 
 CMD [ "bash", "/etc/script.sh" ]
