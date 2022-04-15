@@ -1,9 +1,0 @@
-sudo docker run --rm -it -p 8888:80 -v ~/docker/debian1/site-content:/usr/share/nginx/html mynginx
-    - daemon -> processus en arriere plan -> possibilitée de les passer en 1er plan
-generer un certificat ssl
-    -   https://www.humankode.com/ssl/create-a-selfsigned-certificate-for-nginx-in-5-minutes
-
-dependences pour installer php sur debian buster
-    - https://computingforgeeks.com/install-php-on-debian-linux-systen/
-generer le fichier config wordpress
-    - https://generatewp.com/wp-config/

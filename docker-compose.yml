@@ -5,7 +5,7 @@ services:
   nginx:
     depends_on:
       - wordpress
-    build: ./nginx
+    build: ./srcs/nginx
     ports:
       - "443:443"
     restart: always
@@ -23,7 +23,7 @@ services:
     env_file:
      - .env
     build:
-      context: ./wordpress
+      context: ./srcs/wordpress
     ports:
       - "9000:9000"
     restart: always
@@ -42,7 +42,7 @@ services:
     ports:
       - "3306:3306"
     build:
-      context: ./mariadb
+      context: ./srcs/mariadb
       args:
         - MYSQL_DATABASE={MYSQL_DATABASE}
         - MYSQL_ROOT_PASSWORD={MYSQL_ROOT_PASSWORD}
