@@ -16,8 +16,10 @@ MYSQL_PASSWORD=1234
 until mysqladmin -hmariadb -u${MYSQL_ROOT_USER} -p${MYSQL_ROOT_PASSWORD} ping && \
          mariadb -hmariadb -u${MYSQL_ROOT_USER} -p${MYSQL_ROOT_PASSWORD} -e "SHOW DATABASES;" | grep ${MYSQL_DATABASE}; do
     sleep 2
-    echo "\033[1;31mgiga chad loop\033[m"
+    echo "waiting to connect..."
 done
+echo "msuccessfuly connected to db"
+
 # some help for the different commands 
 #                --- https://developer.wordpress.org/cli/commands/user/create/ --- 
 wp core install --url="emaugale.42.fr" --title="Test" --admin_user="${MYSQL_ROOT_USER}" \

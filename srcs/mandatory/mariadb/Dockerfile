@@ -20,4 +20,4 @@ COPY 	conf/script.sh /var/
 RUN     chmod -R 755 /var/lib/mysql
 RUN     chmod 755 /var/script.sh
 
-CMD 	["bash", "/var/script.sh"]  
+CMD 	["sh", "/var/script.sh"]  
