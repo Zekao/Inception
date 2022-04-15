@@ -2,9 +2,9 @@ FROM	debian:buster
 # network port
 EXPOSE 3306
 
-# update packages and install mariadb
+# update packages and install mariadb ~
 
-# RUN     rm -rf /var/run/mysqld
+# RUN     rm -rf /var/run/mysqld 
 RUN		apt-get update -y
 RUN		apt-get install -y mariadb-server
 RUN 	apt-get install -y mariadb-client

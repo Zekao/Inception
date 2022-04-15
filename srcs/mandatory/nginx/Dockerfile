@@ -12,7 +12,7 @@ RUN apt-get update &&\
    rm -rf /var/lib/apt/lists/*
 
 
-# creating directory for the webbsite
+# creating directory for the website
 RUN mkdir -p /var/www/html/
 # Add infos about my domain
 ARG DOMAIN_NAME

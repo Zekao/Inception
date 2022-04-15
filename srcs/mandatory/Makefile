@@ -1,14 +1,14 @@
 #environement variables
 HOME=/home/emaugale
 
-dns:
-	@sudo sed -i "s/localhost/emaugale.42.fr/g" /etc/hosts
-
-all: dns
+all:
 	mkdir -p ${HOME}/data/wp-db
 	mkdir -p ${HOME}/data/wp-files
 	docker-compose build
 	docker-compose up
+dns:
+	@sudo sed -i "s/localhost/emaugale.42.fr/g" /etc/hosts
+
 clean:
 	docker volume ls -qf dangling=true | xargs -r docker volume rm
 	docker system prune -a

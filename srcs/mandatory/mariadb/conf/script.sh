@@ -1,9 +1,9 @@
 
-MYSQL_DATABASE=inception
-MYSQL_ROOT_PASSWORD=wordpress
-MYSQL_ROOT_USER=root
-MYSQL_USER=emaugale
-MYSQL_PASSWORD=1234
+# MYSQL_DATABASE=inception
+# MYSQL_ROOT_PASSWORD=wordpress
+# MYSQL_ROOT_USER=root
+# MYSQL_USER=emaugale
+# MYSQL_PASSWORD=1234
 
 
 touch tmp_file
