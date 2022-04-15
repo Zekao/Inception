@@ -27,5 +27,4 @@ wp core install --url="emaugale.42.fr" --title="Test" --admin_user="${MYSQL_ROOT
 wp config create --dbname="$MYSQL_DATABASE" --dbuser="$MYSQL_USER" --dbpass="1234"  --allow-root 
 wp user create emaugale test@example.com --role=author  --allow-root
 
-
 php-fpm7.3 -F -R

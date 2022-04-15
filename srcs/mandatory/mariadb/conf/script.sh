@@ -10,12 +10,14 @@ touch tmp_file
 chmod 755 tmp_file
 
 cat << stop_file > tmp_file
-USE mysql;
+CREATE DATABASE inception;
+USE inception;
 FLUSH PRIVILEGES ;
 GRANT ALL ON *.* TO 'root'@'%' identified by '$MYSQL_ROOT_PASSWORD' WITH GRANT OPTION ;
 GRANT ALL ON *.* TO 'root'@'localhost' identified by '$MYSQL_ROOT_PASSWORD' WITH GRANT OPTION ;
 SET PASSWORD FOR 'root'@'localhost'=PASSWORD('${MYSQL_ROOT_PASSWORD}') ;
-GRANT ALL ON \`$MYSQL_DATABASE\`.* TO '$MYSQL_USER'@'%' identified by '$MYSQL_PASSWORD';
+FLUSH PRIVILEGES ;
+GRANT ALL ON \`$MYSQL_DATABASE\`.* TO '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD';
 DROP DATABASE IF EXISTS test ;
 FLUSH PRIVILEGES ;
 stop_file
