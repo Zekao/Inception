@@ -18,13 +18,14 @@ until mysqladmin -hmariadb -u${MYSQL_ROOT_USER} -p${MYSQL_ROOT_PASSWORD} ping &&
     sleep 2
     echo "waiting to connect..."
 done
-echo "msuccessfuly connected to db"
+echo "successfuly connected to db"
 
 # some help for the different commands 
 #                --- https://developer.wordpress.org/cli/commands/user/create/ --- 
 wp core install --url="emaugale.42.fr" --title="Test" --admin_user="${MYSQL_ROOT_USER}" \
     --admin_password="${MYSQL_ROOT_PASSWORD}" --admin_email="admin@admin.fr" --skip-email --allow-root
-# wp user create bob bob@example.com --role=author --allow-root
+wp config create --dbname="$MYSQL_DATABASE" --dbuser="$MYSQL_USER" --dbpass="1234"  --allow-root 
+wp user create emaugale test@example.com --role=author  --allow-root
 
 
 php-fpm7.3 -F -R
